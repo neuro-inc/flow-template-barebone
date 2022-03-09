@@ -1,0 +1,7 @@
+{
+    "project_name": "Neuro Project",
+    "project_description": "",
+    "project_dir": "{{ cookiecutter.project_name.lower() }}",
+    "base_image": "ghcr.io/neuro-inc/base:latest-runtime",
+    "project_id": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
+}

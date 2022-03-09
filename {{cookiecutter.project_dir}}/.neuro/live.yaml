@@ -1,0 +1,92 @@
+kind: live
+## Required. Type of workflow, might be one of the following:
+## - 'live' -- full reference at https://neu-ro.gitbook.io/neuro-flow/reference/live-workflow-syntax
+## - 'batch' -- full reference at https://neu-ro.gitbook.io/neuro-flow/reference/batch-workflow-syntax
+# id: <id>
+## Optional. Identifier of the workflow. By default, the id is 'live'. It's available as $[[ flow.flow_id ]] in experssions.
+## Note: Not to be confused with $[[ flow.project_id ]], which is a different context defined in the `project.yml` file.
+title: {{ cookiecutter.project_name }}
+## Optional. Workflow title. Can be any valid string and is accessible as $[[ flow.title ]]
+
+defaults:
+## Optional section.
+## A map of default settings that will apply to all jobs in the workflow.
+## You can override these global default settings for specific jobs.
+  life_span: 1d
+  ## The default lifespan for jobs ran by the workflow if not overridden by jobs.<job-id>.life_span.
+  ## The lifespan value can be one of the following:
+  ##  - A float number representing the amount of seconds (3600 represents an hour)
+  ##  - A string of the following format: 1d6h15m (1 day, 6 hours, 15 minutes)
+  # preset: gpu-small
+  ## The default preset name used to run all jobs in this project if not overridden by jobs.<job-id>.preset.
+  ## Consider selecting the resource preset separately for each job according to your needs.
+  # env:
+  #   key1: value1
+  #   key2: value2
+  ## A mapping of environment variables that will be set in all jobs of the workflow.
+  ## When two or more environment variables are defined with the same name,
+  ##  `neuro-flow` uses the most specific environment variable.
+  ## For example, an environment variable defined in a job will override the workflow's default.
+  # volumes:
+  #   - storage:some/path:/path/in/job
+  #   - storage://absolute/path:/different/path/in/job
+  ## Set of volumes which will be mounted to all jobs within this project.
+  ## Default volumes are not passed to actions.
+  # schedule_timeout: 20m
+  ## The attribute accepts the following values:
+  ##  - A float number representing the amount of seconds (3600 represents an hour),
+  ##  - A string of the following format: 1d6h15m45s (1 day, 6 hours, 15 minutes, 45 seconds)
+  ## The cluster-wide timeout is used if both default.schedule_timeout and jobs.<job-id>.schedule_timeout are omitted.
+  ## See the job description below for more information.
+  # tags: [tag-a, tag-b]
+  ## A list of tags that are added to every job created by the workflow.
+  # workdir: /users/my_user
+  ## The default working directory for jobs created by this workflow if jobs.<job-id>.workdir is not set.
+
+images:
+  ## Optional section, a mapping of image definitions used by the workflow.
+  train:
+  ## `neuro-flow build train` creates an image from the passed Dockerfile and uploads it to the Neu.ro Registry.
+  ## The $[[ images.img_id.ref ]] expression can be used for pointing to an image from jobs.<job-id>.image.
+    ref: image:$[[ flow.project_id ]]:v1
+    ## Required. Image reference, can be of two types:
+    ##  - Platform-hosted image - its reference should start with the 'image:' prefix. `neuro-flow build <img_id>` will work in this case.
+    ##  - Image hosted on DockerHub - without the 'image:' prefix. In this case, `neuro-flow build <img_id>` will not work.
+    ## Check ./neuro/project.yaml to configure the $[[ flow.project_id ]] part.
+    ## During job execution, the '$[[ flow.project_id ]]' part will be replaced with its string value by the Neuro-Flow engine.
+    ## Hint: You can use the embedded `hash_files()` function to generate a built image's tag based on its content.
+    ## Example:
+    ##  train:
+    ##    ref: image:$[[ flow.project_id ]]:$[[ hash_files('Dockerfile', 'requirements.txt', '{{cookiecutter.project_dir}}/**/*.py')]]
+    dockerfile: $[[ flow.workspace ]]/Dockerfile
+    ## An optional Docker file path used for building images, `Dockerfile` by default. The path should be relative to the context's root.
+    context: $[[ flow.workspace ]]/
+    ## Optional. The Docker context used to build an image, specified as a local path relative to the project's root folder.
+    ## The project's root folder is the folder that contains the '.neuro' directory,
+    ##  its path can be referenced via $[[ flow.workspace ]]/.
+    # build_preset: cpu-small
+    ## Optional. Preset name used to build the Docker image.
+    ## Consider uncommenting and changing it if the resulting image is large. Otherwise, use GPU to build it.
+    # build_args:
+    #   - ARG1=val1
+    #   - ARG2=val2
+    ## A list of optional build arguments passed to the image builder.
+    # env:
+    #  ENV1: val1
+    #  ENV2: val2
+    ## A mapping of environment variables passed to the image builder.
+    ## Hint: You can also map platform secrets as values of environment variables and later utilize them during image building.
+    ## For example, you have a `secret:github_password` which gives you access to a private repository.
+    ## You can map it as an environment variable `GH_PASS: secret:github_password` in the builder job
+    ##   and then pass it further as `--build-arg GH_PASS=$GH_PASS` when building the container.
+    # volumes:
+    #   - storage:folder1:/mnt/folder1:ro
+    #   - storage:folder2:/mnt/folder2
+    #   - volumes.volume_id.ref
+    ## A list of volume references mounted to the image building process.
+    ## Hint: You can also map platform secrets as files and later utilize them during image building.
+    ## For example, you have a `secret:aws_account_credentials` file which gives you access to an S3 bucket.
+    ## You can attach it as a volume to the builder job:
+    ##  `- secret:aws_account_credentials:/kaniko_context/aws_account_credentials`
+    ## A file with credentials will then appear in the root of the build context,
+    ##  since the build context is mounted to the `/kaniko_context` folder within the builder job.
