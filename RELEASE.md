@@ -24,8 +24,7 @@ Instructions:
     $ ls
     Dockerfile  HELP.md  README.md  apt.txt  config  data  modules  notebooks  requirements.txt  results  setup.cfg  update_actions.py
     $ neuro-flow build train
-    $ neuro-flow upload ALL
-    $ neuro-flow run jupyter
+    $ neuro-flow run train
     ...
     ```
 3. Generate changelog:
