@@ -1,18 +1,14 @@
-import pytest
 from pytest_cookies.plugin import Cookies  # type: ignore
 
 from tests.e2e.conftest import exec
 from tests.utils import inside_dir
 
 
-# Also check whether comments and their removal does not break something
-@pytest.mark.parametrize("preserve_comments", ["yes", "no"])
-def test_neuro_flow_live(cookies: Cookies, preserve_comments: str) -> None:
+def test_neuro_flow_live(cookies: Cookies) -> None:
     result = cookies.bake(
         extra_context={
             "project_dir": "test-project",
             "project_id": "awesome_project",
-            "preserve Neuro Flow template hints": preserve_comments,
         }
     )
     with inside_dir(str(result.project_path)):
@@ -23,9 +19,5 @@ def test_neuro_flow_live(cookies: Cookies, preserve_comments: str) -> None:
         assert "is not running" in proc.stdout, proc
 
         proc = exec("neuro-flow --show-traceback run --dry-run train")
-        assert "neuro run" in proc.stdout, proc
-        assert "--tag=project:awesome-project" in proc.stdout, proc
-
-        proc = exec("neuro-flow --show-traceback run --dry-run remote_debug")
         assert "neuro run" in proc.stdout, proc
         assert "--tag=project:awesome-project" in proc.stdout, proc

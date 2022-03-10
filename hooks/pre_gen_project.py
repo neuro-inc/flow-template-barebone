@@ -1,4 +1,3 @@
-import re
 import sys
 from pathlib import Path
 
@@ -30,16 +29,5 @@ if not project_id.isidentifier():
         f"ERROR: '{project_id}' is not a valid project identifier. "
         "It can only contain alphanumeric letters (a-zA-Z0-9), or underscores (_), "
         "and cannot start with a number, or contain any spaces."
-    )
-    sys.exit(1)
-
-
-MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
-module_name = "{{ cookiecutter.code_directory }}"
-
-if not re.match(MODULE_REGEX, module_name):
-    print(
-        "ERROR: %s is not a valid Python module name. Module name can only contain "
-        "letters, digits, and underscores." % module_name
     )
     sys.exit(1)

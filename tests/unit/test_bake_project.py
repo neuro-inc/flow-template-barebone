@@ -1,8 +1,6 @@
 import subprocess
 import sys
-from pathlib import Path
 
-import pytest
 from cookiecutter.exceptions import FailedHookException
 from pytest_cookies.plugin import Cookies  # type: ignore
 
@@ -75,34 +73,6 @@ def test_project_id_hook(cookies: Cookies) -> None:
         assert result.exit_code == 0, id_
 
 
-@pytest.mark.parametrize("preserve_comments", ["yes", "no"])
-def test_project_config_with_comments(cookies: Cookies, preserve_comments: str) -> None:
-    result = cookies.bake(
-        extra_context={
-            "project_dir": "project-with-comments",
-            "preserve Neuro Flow template hints": preserve_comments,
-        }
-    )
-    assert result.exit_code == 0
-    comment_sign = "#"
-    with inside_dir(str(result.project_path)):
-        live_file_content = Path(".neuro/live.yml").read_text()
-        project_file_content = Path(".neuro/project.yml").read_text()
-        l_com_exists = comment_sign in live_file_content
-        p_com_exists = comment_sign in project_file_content
-        if preserve_comments == "yes":
-            assert l_com_exists, ".neuro/live.yml file does not contain comments"
-            assert p_com_exists, ".neuro/project.yml file does not contain comments"
-        elif preserve_comments == "no":
-            assert not l_com_exists, ".neuro/live.yml file contains comments"
-            assert not p_com_exists, ".neuro/project.yml file contains comments"
-        else:
-            raise RuntimeError(
-                f"invalid value '{preserve_comments}' for 'preserve_comments' arg. "
-                " Only 'yes' and 'no' are allowed."
-            )
-
-
 def test_project_description(cookies: Cookies) -> None:
     descriptions = [
         # " ",
@@ -113,8 +83,3 @@ def test_project_description(cookies: Cookies) -> None:
     for descr in descriptions:
         result = cookies.bake(extra_context={"project_description": descr})
         assert result.exit_code == 0, descr
-        with inside_dir(str(result.project_path)):
-            readme_content = Path("README.md").read_text()
-            if descr:
-                assert "## Project description" in readme_content
-                assert descr in readme_content
