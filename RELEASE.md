@@ -14,7 +14,7 @@ Instructions:
     ```
 2. Test `master` manually:
     ```
-    $ cookiecutter gh:neuro-inc/cookiecutter-neuro-project -c master
+    $ cookiecutter gh:neuro-inc/cookiecutter-neuro-project-barebone -c master
     project_name [Neuro Project]:
     project_dir [neuro project]:
     project_id [neuro_project]:

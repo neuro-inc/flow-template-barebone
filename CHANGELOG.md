@@ -6,4 +6,4 @@ Features
 --------
 
 
-- Created a barebone Neu.ro project template based on the `[neuro-inc/cookiecutter-neuro-project](https://github.com/neuro-inc/cookiecutter-neuro-project)` ([#4](https://github.com/neuro-inc/cookiecutter-neuro-project-barebone/issues/4))
+- Created a barebone Neu.ro project template based on the [`neuro-inc/cookiecutter-neuro-project`](https://github.com/neuro-inc/cookiecutter-neuro-project) ([#4](https://github.com/neuro-inc/cookiecutter-neuro-project-barebone/issues/4))
