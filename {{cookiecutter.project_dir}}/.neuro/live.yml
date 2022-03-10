@@ -1,0 +1,13 @@
+kind: live
+title: {{ cookiecutter.project_name }}
+
+images:
+  train:
+    ref: image:$[[ flow.project_id ]]:v1
+    dockerfile: $[[ flow.workspace ]]/Dockerfile
+    context: $[[ flow.workspace ]]/
+
+
+jobs:
+  train:
+    image: $[[ images.train.ref ]]
