@@ -1,6 +1,0 @@
-{
-    "project_name": "Neuro Project",
-    "project_description": "",
-    "project_dir": "{{ cookiecutter.project_name.lower() }}",
-    "project_id": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
-}
