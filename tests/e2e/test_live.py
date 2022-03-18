@@ -1,11 +1,9 @@
-import pytest
 from pytest_cookies.plugin import Cookies  # type: ignore
 
 from tests.e2e.conftest import exec
 from tests.utils import inside_dir
 
 
-@pytest.mark.xfail
 def test_neuro_flow_live(cookies: Cookies) -> None:
     result = cookies.bake(
         extra_context={
