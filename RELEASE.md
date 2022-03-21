@@ -1,7 +1,7 @@
 Release instructions
 ====================
 
-Neuro CLI [uses `release` branch](https://github.com/neuro-inc/platform-client-python/blob/d00a75504d665acdbcdda24f3999ee4b2223054d/neuromation/cli/project.py#L43-L48) to scaffold projects, so to do a release we need to update `release` branch.
+Neuro Flow [uses `master` branch](https://github.com/neuro-inc/neuro-flow/blob/ac659ff0f1f17c6d820cd2126e3769973dfde86b/neuro_flow/cli/project_template.py#L10) to scaffold projects, so to do a release we need to update `master` branch.
 
 
 Instructions:
@@ -41,7 +41,3 @@ Notes:
 
 - When CI is triggered:
     - Each open PR (even draft PR) agains `master`.
-    - Each new commit to `master` and `release`.
-    - Nightly builds: `master` at 00:00 and `release` at 01:00 UTC.
-- Branches `master` and `release` are tested against `staging` (`neuro-public` cluster), whereas all other branches are tested against `dev`.
-- See [here](https://dev.azure.com/neuromation/cookiecutter-neuro-project/_build?definitionId=4) to access builds on Azure Pipelines.
