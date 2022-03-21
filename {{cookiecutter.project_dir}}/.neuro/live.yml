@@ -11,3 +11,5 @@ images:
 jobs:
   train:
     image: $[[ images.train.ref ]]
+    bash: |
+      echo Put your training code here
