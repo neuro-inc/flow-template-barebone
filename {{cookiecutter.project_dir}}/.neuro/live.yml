@@ -3,7 +3,7 @@ title: {{ cookiecutter.project_name }}
 
 images:
   train:
-    ref: image:$[[ flow.project_id ]]:v1
+    ref: image:/$[[ project.owner ]]/$[[ flow.project_id ]]:v1
     dockerfile: $[[ flow.workspace ]]/Dockerfile
     context: $[[ flow.workspace ]]/
 
