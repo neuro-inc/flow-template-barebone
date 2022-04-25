@@ -6,7 +6,7 @@ mypy==0.942
 pipx==1.0.0
 pre-commit==2.18.1
 PyGithub==1.55  # Bump also {{cookiecutter.project_dir}}/.github/workflows/update-neuro-flow-actions.yml:15
-pytest==7.1.1
+pytest==7.1.2
 pytest-asyncio==0.18.3
 pytest-cookies==0.6.1
 towncrier==21.9.0
