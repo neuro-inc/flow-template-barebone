@@ -1,3 +1,16 @@
+Neuro Platform Project Template v22.05.10 (2022-05-10)
+======================================================
+
+
+Features
+--------
+
+
+- Use full storage and volume URIs in the template ([#21](https://github.com/neuro-inc/cookiecutter-neuro-project-barebone/issues/21))
+
+- Added project owner and role generation in post-generate hooks. ([#30](https://github.com/neuro-inc/cookiecutter-neuro-project-barebone/issues/30))
+
+
 Neuro Platform Project Template v22.03.21 (2022-03-21)
 ======================================================
 
