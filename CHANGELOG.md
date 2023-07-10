@@ -1,3 +1,10 @@
+Neuro Platform Project Template v23.07.10 (2023-07-10)
+======================================================
+
+
+No significant changes.
+
+
 Neuro Platform Project Template v22.05.10 (2022-05-10)
 ======================================================
 
