@@ -6,10 +6,7 @@ VERSION_FILE := version.txt
 .PHONY: setup init
 setup init:
 	pip install -r requirements/dev.txt
-	cat requirements/pipx.txt | xargs -rn 1 -- pipx install -f
-	# pipx reinstallation is required untill https://github.com/neuro-inc/neuro-cli/issues/2628 is resolved
-	pipx runpip neuro-all uninstall -y rich
-	pipx runpip neuro-all install "rich==11.2.0"
+	pipx install neuro-all
 	pre-commit install
 
 
