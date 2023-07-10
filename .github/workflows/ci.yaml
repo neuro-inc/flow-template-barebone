@@ -20,7 +20,7 @@ jobs:
     name: Run tests
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.8', '3.9', '3.10', '3.11']
         os: [ubuntu, macos, windows]
       fail-fast: false
     runs-on: ${{ matrix.os }}-latest
@@ -56,8 +56,7 @@ jobs:
 
       - name: Configure environment
         run: |
-          neuro config login-with-token ${{ secrets.NEURO_TOKEN }} ${{ secrets.NEURO_STAGING_URL }}
-          neuro config switch-cluster green-hgx-2
+          neuro config login-with-token ${{ secrets.CLIENT_TEST_E2E_USER_NAME }} https://dev.neu.ro/api/v1
           neuro --color=no config show
 
       - name: Lint
