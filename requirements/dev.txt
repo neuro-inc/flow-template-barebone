@@ -1,5 +1,5 @@
 -r base.txt
-black==23.11.0
+black==23.12.0
 flake8==6.1.0
 git+https://github.com/andriihomiak/pytest-cookies.git@fix/quotes_in_user_config # pytest-cookies==0.6.1, see https://github.com/neuro-inc/cookiecutter-neuro-project/pull/606
 isort==5.13.1
