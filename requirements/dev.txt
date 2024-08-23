@@ -4,7 +4,7 @@ flake8==7.1.0
 git+https://github.com/andriihomiak/pytest-cookies.git@fix/quotes_in_user_config # pytest-cookies==0.6.1, see https://github.com/neuro-inc/cookiecutter-neuro-project/pull/606
 isort==5.13.2
 mypy==1.11.1
-pipx==1.6.0
+pipx==1.7.0
 pre-commit==3.8.0
 PyGithub==2.3.0  # Bump also {{cookiecutter.project_dir}}/.github/workflows/update-neuro-flow-actions.yml:15
 pytest==8.3.2
