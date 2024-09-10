@@ -1,9 +1,9 @@
 kind: live
-title: {{ cookiecutter.project_name }}
+title: {{ cookiecutter.flow_name }}
 
 images:
   train:
-    ref: image:/$[[ project.owner ]]/$[[ flow.project_id ]]:v1
+    ref: image:/$[[ project.project_name ]]/$[[ flow.project_id ]]:v1
     dockerfile: $[[ flow.workspace ]]/Dockerfile
     context: $[[ flow.workspace ]]/
 

@@ -1,6 +1,3 @@
 default_context:
-    project_description: ""
-    full_name: "Neu.ro Test"
-    email: "test@neu.ro"
-    github_username: "neuro-inc"
-    project_name: Test Project
+    flow_description: ""
+    flow_name: Test Flow

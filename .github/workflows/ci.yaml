@@ -2,67 +2,36 @@ name: CI
 
 on:
   push:
-    branches: [ master, release ]
+    branches: [master, release]
   pull_request:
-    branches: [ master ]
-  pull_request_target:
     branches: [master]
   release:
-    types: [ published ]
-
+    types: [published]
 
 jobs:
-
   test:
-    if: |
-      (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') ||
-      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
-    name: Run tests
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']
-        os: [ubuntu, macos, windows]
-      fail-fast: false
-    runs-on: ${{ matrix.os }}-latest
-    env:
-      PYTHONIOENCODING: utf-8
+    name: All checks are passed
+    uses: ./.github/workflows/test.yaml
+    secrets: inherit
+
+  approve:
+    name: Approve bot PR
+    runs-on: ubuntu-latest
+    if: endsWith(github.actor, '[bot]')
+    needs: test
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - name: Checkout commit
+      - name: Checkout
         uses: actions/checkout@v4
+      - name: metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Install python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Cache Python and its deps
-        uses: actions/cache@v4
-        with:
-          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('requirements/*.txt') }}
-          path: ${{ env.pythonLocation }}
-
-      - name: Install GNU libraries for MacOS
-        if: matrix.os == 'macos'
-        shell: bash
-        run: |
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install findutils
-          echo PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH" >> $GITHUB_ENV
-
-      - name: Install python dependencies
-        run: |
-          make setup
-
-      - name: Configure environment
-        run: |
-          neuro config login-with-token ${{ secrets.CLIENT_TEST_E2E_USER_NAME }} https://dev.neu.ro/api/v1
-          neuro --color=no config show
-
-      - name: Lint
-        run: |
-          make lint
-
-      - name: Run tests
-        run: |
-          make test
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge for bot PRs
+        run: gh pr merge --auto --squash --delete-branch "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,7 +1,7 @@
-Neu.ro Platform Project Template
+Apolo Platform Project Template
 ===============================
 
-Barebone template for the [Neu.ro](https://neu.ro) platform projects based on [cookiecutter project](https://github.com/cookiecutter/cookiecutter).
+Barebone template for the [Apolo](https://console.apolo.us) platform projects based on [cookiecutter project](https://github.com/cookiecutter/cookiecutter).
 
 Usage
 -----

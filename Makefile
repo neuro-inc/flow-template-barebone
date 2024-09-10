@@ -1,12 +1,11 @@
 LINTER_DIRS := tests
-NEURO_COMMAND=neuro --verbose --show-traceback --color=no
 TMP_DIR := $(shell mktemp -d)
 VERSION_FILE := version.txt
 
 .PHONY: setup init
 setup init:
 	pip install -r requirements/dev.txt
-	pipx install neuro-all
+	pipx install apolo-all
 	pre-commit install
 
 
@@ -30,15 +29,15 @@ format:
 test:
 	 export TMP_DIR=$$(mktemp -d) && \
 	   cookiecutter --no-input --config-file ./tests/cookiecutter.yaml --output-dir $$TMP_DIR . && \
-	   ls -d "$$TMP_DIR/test project/.neuro/"
+	   ls -d "$$TMP_DIR/test flow/.neuro/"
 	 pytest -v -n auto tests/unit
 	 pytest -v -n auto tests/e2e
 	 @echo -e "OK\n"
 
 .PHONY: changelog-draft
 changelog-draft: update-version $(VERSION_FILE)
-	towncrier --draft --name "Neuro Platform Project Template" --version `cat version.txt`
+	towncrier --draft --name "Apolo Platform Flow Template" --version `cat version.txt`
 
 .PHONY: changelog
 changelog: update-version $(VERSION_FILE)
-	towncrier --name "Neuro Platform Project Template" --version `cat version.txt` --yes
+	towncrier --name "Apolo Platform Flow Template" --version `cat version.txt` --yes

@@ -7,17 +7,17 @@ from tests.utils import inside_dir
 def test_neuro_flow_live(cookies: Cookies) -> None:
     result = cookies.bake(
         extra_context={
-            "project_dir": "test-project",
-            "project_id": "awesome_project",
+            "flow_dir": "test-flow",
+            "flow_id": "awesome_flow",
         }
     )
     with inside_dir(str(result.project_path)):
-        proc = exec("neuro-flow --show-traceback ps")
+        proc = exec("apolo-flow --show-traceback ps")
         assert "JOB" in proc.stdout, proc
 
-        proc = exec("neuro-flow --show-traceback status train", assert_exit_code=False)
+        proc = exec("apolo-flow --show-traceback status train", assert_exit_code=False)
         assert "is not running" in proc.stdout, proc
 
-        proc = exec("neuro-flow --show-traceback run --dry-run train")
-        assert "neuro run" in proc.stdout, proc
-        assert "--tag=project:awesome-project" in proc.stdout, proc
+        proc = exec("apolo-flow --show-traceback run --dry-run train")
+        assert "apolo run" in proc.stdout, proc
+        assert "--tag=project:awesome-flow" in proc.stdout, proc
