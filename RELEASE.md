@@ -1,7 +1,7 @@
 Release instructions
 ====================
 
-Neuro Flow [uses `master` branch](https://github.com/neuro-inc/neuro-flow/blob/ac659ff0f1f17c6d820cd2126e3769973dfde86b/neuro_flow/cli/project_template.py#L10) to scaffold projects, so to do a release we need to update `master` branch.
+Apolo Flow [uses `master` branch](https://github.com/neuro-inc/neuro-flow/blob/ac659ff0f1f17c6d820cd2126e3769973dfde86b/neuro_flow/cli/project_template.py#L10) to scaffold projects, so to do a release we need to update `master` branch.
 
 
 Instructions:
@@ -15,16 +15,14 @@ Instructions:
 2. Test `master` manually:
     ```
     $ cookiecutter gh:neuro-inc/cookiecutter-neuro-project-barebone -c master
-    project_name [Neuro Project]:
-    project_dir [neuro project]:
-    project_id [neuro_project]:
-    code_directory [modules]:
-    preserve Neuro Flow template hints [yes]:
-    $ cd neuro project
+    flow_name [My Flow]:
+    flow_dir [my flow]:
+    flow_id [my_flow]:
+    $ cd my flow
     $ ls
     Dockerfile  apt.txt  requirements.txt  results
-    $ neuro-flow build train
-    $ neuro-flow run train
+    $ apolo-flow build train
+    $ apolo-flow run train
     ...
     ```
 3. Generate changelog:
