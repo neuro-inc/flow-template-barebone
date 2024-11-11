@@ -14,7 +14,7 @@ Instructions:
     ```
 2. Test `master` manually:
     ```
-    $ cookiecutter gh:neuro-inc/cookiecutter-neuro-project-barebone -c master
+    $ cookiecutter gh:neuro-inc/flow-template-barebone -c master
     flow_name [My Flow]:
     flow_dir [my flow]:
     flow_id [my_flow]:

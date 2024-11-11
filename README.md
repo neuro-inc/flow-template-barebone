@@ -5,7 +5,7 @@ Barebone template for the [Apolo](https://console.apolo.us) platform projects ba
 
 Usage
 -----
-Consider using this template via cookiecutter via `cookiecutter gh:neuro-inc/cookiecutter-neuro-project-barebone`.
+Consider using this template via cookiecutter via `cookiecutter gh:neuro-inc/flow-template-barebone`.
 
 Release
 -------
