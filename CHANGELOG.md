@@ -1,3 +1,10 @@
+Apolo Platform Flow Template v24.11.11 (2024-11-11)
+===================================================
+
+
+No significant changes.
+
+
 Neuro Platform Project Template v23.07.10 (2023-07-10)
 ======================================================
 
