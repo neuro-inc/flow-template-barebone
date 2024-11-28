@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/neuro-inc/neuro-flow/refs/heads/master/src/apolo_flow/flow-schema.json
 kind: live
 title: {{ cookiecutter.flow_name }}
 
