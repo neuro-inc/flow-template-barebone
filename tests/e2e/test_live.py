@@ -4,7 +4,7 @@ from tests.e2e.conftest import exec
 from tests.utils import inside_dir
 
 
-def test_neuro_flow_live(cookies: Cookies) -> None:
+def test_apolo_flow_live(cookies: Cookies) -> None:
     result = cookies.bake(
         extra_context={
             "flow_dir": "test-flow",
