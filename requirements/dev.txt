@@ -6,6 +6,6 @@ pytest==8.4.1
 pytest-asyncio==1.1.0
 pytest-cookies==0.7.0
 pytest-xdist==3.8.0
-PyYAML==6.0.2
+PyYAML==6.0.3
 towncrier==24.8.0
 types-PyYAML==6.0.12.20250915
