@@ -1,7 +1,6 @@
 import shutil
 from pathlib import Path
 
-
 # >>> Handling project name
 PROJECT_NAME = ""
 try:
